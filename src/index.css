@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply dark:bg-gray-800 dark:text-white dark:border-gray-700 duration-150;
+}
+
+body * {
+  @apply  dark:text-white dark:border-gray-700 duration-150;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.badge {
+  @apply flex h-fit items-center gap-1 font-semibold p-1 text-xs rounded px-2 py-0.5 justify-center w-fit text-black dark:text-white
+}
+
+.button {
+  @apply py-2 px-5 border rounded-lg border-black dark:border-white duration-150
+}
+
+.button:hover {
+  @apply underline duration-150 bg-zinc-300 dark:bg-zinc-600
+}
+
+.button:disabled {
+  @apply opacity-30
+}
+
+.button-green {
+  @apply bg-white text-green-600 border-green-600;
+  @apply dark:bg-green-600 dark:text-white;
+}
+
+.button-green:hover {
+  @apply bg-emerald-200 dark:bg-green-600
+}
+
+/* Red button */
+.button-red {
+  @apply bg-white text-red-600 border-red-600;
+  @apply dark:bg-red-600 dark:text-white;
+}
+
+.button-red:hover {
+  @apply bg-red-200 dark:bg-red-500
+}
+
+/* Yellow button */
+.button-yellow {
+  @apply bg-white text-yellow-400 border-yellow-400;
+  @apply dark:bg-yellow-600 dark:text-white;
+}
+
+.button-yellow:hover {
+  @apply bg-yellow-100 dark:bg-yellow-500
+}
+
+/* Yellow button */
+.button-blue {
+  @apply text-white bg-primary-700;
+  @apply hover:bg-primary-800 focus:ring-4 focus:ring-primary-300;
+  @apply dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800;
+}
+
+
+.breadcrumb {
+  @apply text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white
+}
+
+.pi-label {
+  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+}
+
+.pi-input {
+  @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500;
+}
+
+.file-input {
+  @apply p-0
+}
