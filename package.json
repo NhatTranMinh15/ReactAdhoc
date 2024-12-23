@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "flowbite": "^2.3.0",
+    "flowbite": "^2.5.2",
     "tailwindcss": "3.4.3"
   }
 }
