@@ -5,6 +5,7 @@ import appRouter from "./app.router";
 import { AuthenticatedProvider } from "./shared/AuthenticatedContext";
 
 function App() {
+
     return (
         <AuthenticatedProvider>
             <RouterProvider router={appRouter} />
