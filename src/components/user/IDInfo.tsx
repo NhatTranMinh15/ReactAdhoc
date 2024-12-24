@@ -1,12 +1,26 @@
-import { IDDocumentType } from '../../types/User'
-import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
+import { IDDocumentType, UserFormProps } from '../../types/User'
+import { useEffect } from 'react';
 
-type Props = {
-    register: UseFormRegister<FieldValues>;
-    errors: FieldErrors<FieldValues>
+type Props = UserFormProps & {
 }
+const name = "ID"
+const IDInfo = ({ errors, register, control }: Props) => {
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "phones"
+    });
 
-const IDInfo = ({ errors, register }: Props) => {
+    function removeFields(index: number) {
+        if (fields.length > 1) {
+            remove(index)
+        }
+    }
+
+    useEffect(() => {
+        append({ name: "phone" })
+        return () => { remove(0) }
+    }, [])
     return (
         <div className='p-3 border border-zinc-200 dark:border-gray-700 rounded-lg'>
             <h3 className="mb-4 text-xl font-semibold dark:text-white">Identification Documents</h3>
@@ -16,7 +30,7 @@ const IDInfo = ({ errors, register }: Props) => {
 
                     <div className="col-span-6 md:col-span-2">
                         <label htmlFor="emailType" className="pi-label">Type</label>
-                        <select name="emailType" id="emailType" className='pi-input' required>
+                        <select name="emailType" id="emailType" className='pi-input' required >
                             {
                                 Object.entries(IDDocumentType).map((type) => (
                                     <option key={type[0]} value={type[0]} className={"option-green"}>{type[1]}</option>

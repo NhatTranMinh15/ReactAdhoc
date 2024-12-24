@@ -1,3 +1,5 @@
+import { UseFormRegister, FieldValues, FieldErrors, Control, useFieldArray } from 'react-hook-form';
+
 export enum AddressType {
     MAILING = "Mailing",
     WORK = "Work"
@@ -21,4 +23,10 @@ export enum OccupationType {
     TEACHER = "Teacher",
     DOCTOR = "Doctor",
     OTHERS = "Others"
+}
+
+export type UserFormProps = {
+      register: UseFormRegister<FieldValues>;
+      errors: FieldErrors<FieldValues>;
+      control: Control<FieldValues, any>;
 }

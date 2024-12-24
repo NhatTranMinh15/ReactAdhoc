@@ -1,19 +1,18 @@
 import { useRef, useState } from "react"
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 
 type Props = {
   register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<FieldValues>
-
+  errors: FieldErrors<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>
 }
 
-const PersonalInfo = ({ errors, register }: Props) => {
-  const [age, setAge] = useState(0);
+const PersonalInfo = ({ errors, register, setValue }: Props) => {
   function calculateAge(value: string) {
     const dob = new Date(value);
     const now = new Date();
     const a = parseInt(((now.valueOf() - dob.valueOf()) / 31536000000).toString());
-    setAge(a)
+    setValue("age", a)
   }
 
   return (
@@ -22,28 +21,32 @@ const PersonalInfo = ({ errors, register }: Props) => {
       <fieldset>
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="first-name" className="pi-label">First Name</label>
-            <input type="text" name="first-name" id="first-name" className="pi-input" placeholder="Enter your first name" required />
+            <label htmlFor="firstName" className="pi-label">First Name</label>
+            <input type="text" id="firstName" className="pi-input" placeholder="Enter your first name"  {...register("firstName", { required: "First name cannot be null" })} />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="last-name" className="pi-label">Last Name</label>
-            <input type="text" name="last-name" id="last-name" className="pi-input" placeholder="Enter your last name" required />
+            <label htmlFor="lastName" className="pi-label">Last Name</label>
+            <input type="text" id="lastName" className="pi-input" placeholder="Enter your last name"  {...register("lastName", { required: "Last name cannot be null" })} />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="middle-name" className="pi-label">Middle Name</label>
-            <input type="text" name="middle-name" id="middle-name" className="pi-input" placeholder="Enter your middle name" />
+            <label htmlFor="middleName" className="pi-label">Middle Name</label>
+            <input type="text" id="middleName" className="pi-input" placeholder="Enter your middle name" {...register("middleName")} />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
             <label htmlFor="DOB" className="pi-label">Date of Birth</label>
-            <input type="date" name="DOB" id="DOB" className="pi-input" placeholder="15/12/2001" required onChange={(e) => { calculateAge(e.target.value) }} />
+            <input type="date" id="DOB" className="pi-input" placeholder="15/12/2001" {...register("DOB", {
+              onChange(e) {
+                calculateAge(e.target.value);
+              }, required: "Date of birth cannot be null"
+            })} />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
             <label htmlFor="age" className="pi-label">Age</label>
-            <input type="number" name="age" id="age" className="pi-input" placeholder="Your age" value={age} disabled />
+            <input type="text" readOnly id="age" className="pi-input" placeholder="Your age" {...register("age", { })} />
           </div>
         </div>
       </fieldset>

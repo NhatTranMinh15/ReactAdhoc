@@ -2,9 +2,15 @@ import Header from "../components/header/header";
 import Sidebar from "../components/sidebar/sidebar";
 import { Navigate, Outlet } from "react-router";
 import Footer from "../components/footer/footer";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthenticatedContext } from "../shared/AuthenticatedContext";
+import { initFlowbite } from "flowbite";
 const Pages = () => {
+    
+    useEffect(() => {
+        initFlowbite()
+    }, []);
+
     const isAuthenticated = useContext(AuthenticatedContext)
     if(!isAuthenticated){
         return <Navigate to={"/pages/auth/login"}/>
