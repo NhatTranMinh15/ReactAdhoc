@@ -1,21 +1,20 @@
 import { useFieldArray } from 'react-hook-form';
-import { EmailType, UserFormProps } from '../../types/User'
-import { useEffect } from 'react';
+import { AddressType, EmailDataType, EmailType, UserFormProps } from '../../../types/User'
+import ErrorText from '../../ErrorText';
 
 type Props = UserFormProps & {
 }
 const name = 'emails';
-const EmailInfo = ({ errors, register, control }: Props) => {
+const baseEmail: EmailDataType = {
+  preferred: 1,
+  emailAddress: "",
+  emailType: EmailType.WORK
+}
+
+const EmailInfo = ({ form }: Props) => {
+  const { register, control, formState: { errors } } = form;
+
   const { fields, append, remove } = useFieldArray({ control, name });
-
-  function removeFields(index: number) {
-    if (fields.length > 1) { remove(index); }
-  }
-
-  useEffect(() => {
-    append({ name });
-    return () => { remove(0); }
-  }, [])
 
   return (
     <div className='p-3 border border-zinc-200 dark:border-gray-700 rounded-lg'>
@@ -25,12 +24,13 @@ const EmailInfo = ({ errors, register, control }: Props) => {
           <fieldset key={field.id} className='p-3 border border-zinc-200 dark:border-gray-700 my-3 rounded-lg'>
             <legend className='dark:text-white text-lg font-medium border border-zinc-200 rounded-lg px-3'>
               Emails
-              <button type="button" className='ps-3 font-bold hover:text-red-600' onClick={() => removeFields(index)}>&times;</button>
+              <button type="button" className='ps-3 font-bold hover:text-red-600' onClick={() => remove(index)}>&times;</button>
             </legend>
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="emailAddress" className="pi-label">Email Address</label>
                 <input type="email" id="emailAddress" className="pi-input" placeholder="Enter email address" {...register(`${name}.${index}.emailAddress`, { required: "Email address is required" })} />
+                <ErrorText error={errors[name] ? errors[name][index]?.emailAddress?.message : ""} />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -42,21 +42,23 @@ const EmailInfo = ({ errors, register, control }: Props) => {
                     ))
                   }
                 </select>
+                <ErrorText error={errors[name] ? errors[name][index]?.emailType?.message : ""} />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="addressType" className="pi-label">Preferred</label>
-                <select id="addressType" className='pi-input' {...register(`${name}.${index}.addressType`, { required: "Address type is required" })}>
+                <label htmlFor="preferred" className="pi-label">Preferred</label>
+                <select id="preferred" className='pi-input' {...register(`${name}.${index}.preferred`, { required: "Preference type is required" })}>
                   <option value={1} className={"option-green"}>Yes</option>
                   <option value={0} className={"option-green"}>No</option>
                 </select>
+                <ErrorText error={errors[name] ? errors[name][index]?.preferred?.message : ""} />
               </div>
             </div>
           </fieldset>
         ))
       }
       <div>
-        <button type='button' className='button button-green' onClick={() => append({ name })}>Add Email</button>
+        <button type='button' className='button button-green' onClick={() => append(baseEmail)}>Add Email</button>
       </div>
     </div>
   )
