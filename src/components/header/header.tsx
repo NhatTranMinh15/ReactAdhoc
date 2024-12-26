@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthenticatedContext } from "../../shared/AuthenticatedContext";
+import { useContext } from "react";
+import { AuthenticatedContext } from "../../context/AuthenticatedContext";
 import { DarkThemeToggle } from "flowbite-react";
 
 const Header = () => {

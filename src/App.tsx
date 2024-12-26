@@ -1,10 +1,14 @@
-import React from 'react';
+import { useEffect } from 'react';
 import './App.css';
-import { RouterProvider, } from "react-router";
-import appRouter from "./app.router";
-import { AuthenticatedProvider } from "./shared/AuthenticatedContext";
+import { initFlowbite } from 'flowbite';
+import { AuthenticatedProvider } from './context/AuthenticatedContext';
+import { RouterProvider } from 'react-router';
+import appRouter from './App.router';
 
 function App() {
+    useEffect(() => {
+        initFlowbite()
+    }, []);
 
     return (
         <AuthenticatedProvider>
