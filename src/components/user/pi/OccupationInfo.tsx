@@ -1,5 +1,5 @@
-import { useFieldArray } from 'react-hook-form';
-import { FormDataType, OccupationDataType, OccupationType, UserFormProps } from '../../../types/User'
+import { FieldErrors, useFieldArray } from 'react-hook-form';
+import { FormDataType, OccupationDataType, OccupationType, FormProps, UserFormDataType, UserFormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 
 type Props = UserFormProps & {
@@ -11,10 +11,11 @@ const baseOccuation: OccupationDataType = {
   toDate: "",
 }
 const OccupationInfo = ({ form }: Props) => {
-  const { register, control, formState: { errors }, getValues } = form;
+  const { register, control, formState: { errors: err }, getValues } = form;
   const { fields, append, remove } = useFieldArray({ control, name });
-
-  function validateFromDate(value: string, formValues: FormDataType, index: number) {
+  const errors: FieldErrors<UserFormDataType> = err
+  
+  function validateFromDate(value: string, formValues: UserFormDataType, index: number) {
     const from = new Date(value).valueOf();
     const now = new Date().valueOf();
     if (from > now) return "Invalid start date";
@@ -24,8 +25,8 @@ const OccupationInfo = ({ form }: Props) => {
     if (from > to) return "Start date cannot be after end date";
     return true
   }
-  
-  function validateToDate(value: string, formValues: FormDataType, index: number) {
+
+  function validateToDate(value: string, formValues: UserFormDataType, index: number) {
     const to = new Date(value).valueOf();
     const now = new Date().valueOf();
     if (to > now) return "Invalid end date";
@@ -62,13 +63,13 @@ const OccupationInfo = ({ form }: Props) => {
 
               <div className="col-span-6 sm:col-span-2">
                 <label htmlFor="fromDate" className="pi-label">Start Date</label>
-                <input type="date" id="fromDate" className="pi-input" {...register(`${name}.${index}.fromDate`, { required: "Start date is required", validate: (value, formValues) => { return validateFromDate(value, formValues, index) } })} />
+                <input type="date" id="fromDate" className="pi-input" {...register(`${name}.${index}.fromDate`, { required: "Start date is required", validate: (value, formValues) => { return validateFromDate(value, formValues as UserFormDataType, index) } })} />
                 <ErrorText error={errors[name] ? errors[name][index]?.fromDate?.message : ""} />
               </div>
 
               <div className="col-span-6 sm:col-span-2">
                 <label htmlFor="toDate" className="pi-label">End Date</label>
-                <input type="date" id="toDate" className="pi-input" {...register(`${name}.${index}.toDate`, {validate: (value, formValues) => { return validateToDate(value, formValues, index) }  })} />
+                <input type="date" id="toDate" className="pi-input" {...register(`${name}.${index}.toDate`, { validate: (value, formValues) => { return validateToDate(value, formValues as UserFormDataType, index) } })} />
                 <ErrorText error={errors[name] ? errors[name][index]?.toDate?.message : ""} />
               </div>
 

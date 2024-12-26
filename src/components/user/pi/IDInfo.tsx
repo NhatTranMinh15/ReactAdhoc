@@ -1,5 +1,5 @@
 import { useFieldArray } from 'react-hook-form';
-import { IDDataType, IDDocumentType, UserFormProps } from '../../../types/User'
+import { IDDataType, IDDocumentType, FormProps, UserFormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 import { useEffect } from 'react';
 

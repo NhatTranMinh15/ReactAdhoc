@@ -1,4 +1,4 @@
-import { AddressType, ContactDataType, UserFormProps } from '../../../types/User'
+import { AddressType, ContactDataType, FormProps, UserFormProps } from '../../../types/User'
 import { useFieldArray } from 'react-hook-form';
 import ErrorText from '../../ErrorText';
 

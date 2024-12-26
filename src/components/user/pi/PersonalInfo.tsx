@@ -1,5 +1,5 @@
 import ErrorText from "../../ErrorText";
-import { UserFormProps } from "../../../types/User";
+import { FormProps, UserFormProps } from "../../../types/User";
 
 type Props = UserFormProps & {
 }

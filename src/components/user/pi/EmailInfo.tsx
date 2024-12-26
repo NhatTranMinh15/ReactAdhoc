@@ -1,5 +1,5 @@
 import { useFieldArray } from 'react-hook-form';
-import { AddressType, EmailDataType, EmailType, UserFormProps } from '../../../types/User'
+import { AddressType, EmailDataType, EmailType, FormProps, UserFormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 
 type Props = UserFormProps & {

@@ -59,7 +59,7 @@ export type OccupationDataType = {
     toDate: string;
 }
 
-export type FormDataType = {
+export type UserFormDataType = {
     firstName: string;
     lastName: string;
     middleName: string;
@@ -72,6 +72,81 @@ export type FormDataType = {
     occupations: OccupationDataType[];
 }
 
+export enum IncomeType {
+    SALARY = "Salary",
+    INVESTMENT = "Investment",
+    OTHERS = "Others"
+}
+export enum AssetType {
+    BOND = "Bond",
+    LIQUIDITY = "Liquidity",
+    REAL_ESTATE = "Real Estate",
+    OTHERS = "Others"
+}
+
+export enum LiabilityType {
+    PERSONAL_LOAN = "Personal Loan",
+    REAL_ESTATE_LOAN = "Real Estate Loan",
+    OTHERS = " Others"
+}
+export enum SourceOfWealthType {
+    INHERITANCE = 'Inheritance',
+    DONATION = "Donation"
+}
+export enum ExperienceInFinanceType {
+    BELOW_FIVE = '< 5 years',
+    BELOW_TEN = "> 5 and < 10 years",
+    ABOVE_TEN = "> 10 years"
+}
+export enum RiskToleranceType {
+    TEN_PERCENT = '10%',
+    THIRTY_PERCENT = '30%',
+    ALL_IN = 'All-in',
+}
+export type IncomeDataType = {
+    incomeType: IncomeType;
+    amount: string;
+}
+export type AssetDataType = {
+    assetType: AssetType;
+    amount: string;
+}
+export type LiabilityDataType = {
+    liabilityType: LiabilityType;
+    amount: string;
+}
+export type SourceOfWealthDataType = {
+    sourceOfWealthType: SourceOfWealthType;
+    amount: string;
+}
+export type ExperienceDataType = {
+    riskTolerance: RiskToleranceType,
+    experienceInFinance: ExperienceInFinanceType
+}
+export type KYCFormDataType = {
+    incomes: IncomeDataType[],
+    assets: AssetDataType[],
+    liabilities: LiabilityDataType[],
+    totalLiability: number
+    sourcesOfWealth: SourceOfWealthDataType[],
+    totalSourceOfWealth: number,
+    experience: ExperienceDataType
+
+    totalIncome: number
+    totalAsset: number
+    netWorth: number
+}
+
 export type UserFormProps = {
+    form: UseFormReturn<UserFormDataType, any, undefined>
+}
+
+export type KYCFormProps = {
+    form: UseFormReturn<KYCFormDataType, any, undefined>
+}
+
+export type FormDataType = UserFormDataType | KYCFormDataType
+
+export type FormProps = {
     form: UseFormReturn<FormDataType, any, undefined>
 }
