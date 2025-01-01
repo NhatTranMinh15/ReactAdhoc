@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { FieldValues, useForm } from "react-hook-form";
 import ErrorText from "../../../components/ErrorText";
 import { DarkThemeToggle } from "flowbite-react";
+import { LoginType, Token } from "../../../types/Auth";
+import { useAuth } from "../../../context/AuthContext";
 
 const registerOptions = {
     username: {
@@ -33,8 +35,31 @@ const registerOptions = {
 };
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const handleRegistration = (data: any) => console.log(data);
+    const { register, handleSubmit, formState: { errors, isLoading, isSubmitting }, getValues } = useForm<LoginType>();
+    const navigate = useNavigate()
+    const { login } = useAuth()
+    async function handleRegistration() {
+        const data = getValues()
+        const remember = data.remember
+        const body = {
+            username: data.username,
+            password: data.password
+        }
+        const response = await fetch("https://dummyjson.com/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const responseBody: Token = await response.json()
+        if (remember) {
+            localStorage.setItem("loginUser", JSON.stringify(responseBody))
+        } else {
+            sessionStorage.setItem("loginUser", JSON.stringify(responseBody))
+        }
+        await login(responseBody.accessToken)
+        return navigate("/")
+    }
+
     return (
         <div className="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
             <a href="#" className="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 ">
@@ -49,12 +74,12 @@ const Login = () => {
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleRegistration)}>
                     <div>
                         <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 ">Your Username</label>
-                        <input type="text" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name@company.com" {...register('username', registerOptions.username)} />
+                        <input type="text" id="username" defaultValue={"michaelw"} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name@company.com" {...register('username', registerOptions.username)} />
                         <ErrorText error={errors.username?.message} />
                     </div>
                     <div>
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
-                        <input type="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" {...register('password', registerOptions.password)} />
+                        <input type="password" id="password" defaultValue={"michaelwpass"} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" {...register('password', registerOptions.password)} />
                         <ErrorText error={errors.password?.message} />
                     </div>
                     <div className="flex items-start">
@@ -64,9 +89,11 @@ const Login = () => {
                         <div className="ml-3 text-sm">
                             <label htmlFor="remember" className="font-medium text-gray-900 ">Remember me</label>
                         </div>
-                        <Link to='/pages/auth/reset-password' className="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">Lost Password?</Link>
+                        <Link to='/auth/reset-password' className="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500">Lost Password?</Link>
                     </div>
-                    <button type="submit" className="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login to your account</button>
+                    <button type="submit" className="button button-blue">
+                        {isSubmitting ? "Logging in" : "Login to your account"}
+                    </button>
                     <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         Forgot password? <Link to='/auth/sign-up' className="text-primary-700 hover:underline dark:text-primary-500">Sign-up</Link>
                     </div>

@@ -49,7 +49,7 @@ export type PhoneDataType = {
     preferred: number;
 }
 export type IDDataType = {
-    IDType: string;
+    IDType: IDDocumentType;
     expiryDate: string;
     attachment: File | null;
 }
@@ -137,16 +137,10 @@ export type KYCFormDataType = {
     netWorth: number
 }
 
-export type UserFormProps = {
-    form: UseFormReturn<UserFormDataType, any, undefined>
-}
-
-export type KYCFormProps = {
-    form: UseFormReturn<KYCFormDataType, any, undefined>
-}
-
-export type FormDataType = UserFormDataType | KYCFormDataType
+export type FormDataType = UserFormDataType & KYCFormDataType
 
 export type FormProps = {
     form: UseFormReturn<FormDataType, any, undefined>
 }
+
+

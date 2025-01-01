@@ -1,8 +1,8 @@
 import { useFieldArray } from 'react-hook-form';
 import ErrorText from '../../ErrorText';
-import { FormProps, KYCFormProps, SourceOfWealthDataType, SourceOfWealthType } from '../../../types/User';
+import { FormProps, SourceOfWealthDataType, SourceOfWealthType } from '../../../types/User';
 
-type Props = KYCFormProps & {
+type Props = FormProps & {
 
 }
 
@@ -63,7 +63,7 @@ const SourceOfWealthInfo = ({ form }: Props) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="amount" className="pi-label">Amount</label>
-                <input type="number" id="amount" className="pi-input" placeholder="Enter amount" {...register(`${name}.${index}.amount`, { min: { value: 0, message: "Amount can not go below zero" }, onChange:calculateTotal })} />
+                <input type="number" min={1} id="amount" className="pi-input" placeholder="Enter amount" {...register(`${name}.${index}.amount`, { min: { value: 1, message: "Amount can not go below one" }, onChange: calculateTotal })} />
                 <ErrorText error={errors[name] ? errors[name][index]?.amount?.message : ""} />
               </div>
 

@@ -1,8 +1,8 @@
 import { useFieldArray } from 'react-hook-form';
-import { AddressType, EmailDataType, EmailType, FormProps, UserFormProps } from '../../../types/User'
+import { EmailDataType, EmailType, FormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 const name = 'emails';
 const baseEmail: EmailDataType = {
