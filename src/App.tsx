@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
 import './App.css';
 import { initFlowbite } from 'flowbite';
-import { AuthenticatedProvider } from './context/AuthenticatedContext';
 import { RouterProvider } from 'react-router';
 import appRouter from './App.router';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
     useEffect(() => {
+        console.log("init flowbite");
+        
         initFlowbite()
-    }, []);
+    },);
 
     return (
-        <AuthenticatedProvider>
+        <AuthProvider>
             <RouterProvider router={appRouter} />
-        </AuthenticatedProvider>
+        </AuthProvider>
     )
 }
 

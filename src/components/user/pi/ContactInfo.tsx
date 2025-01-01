@@ -1,8 +1,8 @@
-import { AddressType, ContactDataType, FormProps, UserFormProps } from '../../../types/User'
+import { AddressType, ContactDataType, FormProps } from '../../../types/User'
 import { useFieldArray } from 'react-hook-form';
 import ErrorText from '../../ErrorText';
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 
 const name = "contacts"

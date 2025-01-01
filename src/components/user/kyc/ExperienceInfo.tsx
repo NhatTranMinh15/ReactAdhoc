@@ -1,7 +1,7 @@
-import { ExperienceInFinanceType, FormProps, KYCFormProps, RiskToleranceType } from '../../../types/User';
+import { ExperienceInFinanceType, FormProps, RiskToleranceType } from '../../../types/User';
 import ErrorText from '../../ErrorText';
 
-type Props = KYCFormProps & {
+type Props = FormProps & {
 
 }
 

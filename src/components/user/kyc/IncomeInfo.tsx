@@ -1,8 +1,8 @@
 import { useFieldArray } from 'react-hook-form';
-import { IncomeDataType, IncomeType, KYCFormProps } from '../../../types/User';
+import { IncomeDataType, IncomeType, FormProps } from '../../../types/User';
 import ErrorText from '../../ErrorText';
 
-type Props = KYCFormProps & {
+type Props = FormProps & {
 
 }
 

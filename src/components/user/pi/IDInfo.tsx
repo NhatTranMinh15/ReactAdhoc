@@ -1,13 +1,13 @@
 import { useFieldArray } from 'react-hook-form';
-import { IDDataType, IDDocumentType, FormProps, UserFormProps } from '../../../types/User'
+import { IDDataType, IDDocumentType, FormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 import { useEffect } from 'react';
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 const name = "IDs"
 const baseID: IDDataType = {
-  IDType: "",
+  IDType: IDDocumentType.ID_CARD,
   expiryDate: "",
   attachment: null,
 }
@@ -25,6 +25,7 @@ const IDInfo = ({ form }: Props) => {
     append(baseID)
     return () => { remove(0) }
   }, [])
+  
   return (
     <div className='p-3 border border-zinc-200 rounded-lg'>
       <h3 className="mb-4 text-xl font-semibold">Identification Documents</h3>

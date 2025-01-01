@@ -2,12 +2,13 @@ import { Navigate, Outlet } from "react-router";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/footer";
-import { useContext } from "react";
-import { AuthenticatedContext } from "../../context/AuthenticatedContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Home = () => {
-    const user = useContext(AuthenticatedContext)
-    if (!user) {
+
+    const {isLoggedIn} = useAuth()
+    
+    if (!isLoggedIn) {
         return <Navigate to={"/auth/login"} />
     }
     return (

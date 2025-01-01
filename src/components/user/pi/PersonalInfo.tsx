@@ -1,7 +1,7 @@
 import ErrorText from "../../ErrorText";
-import { FormProps, UserFormProps } from "../../../types/User";
+import { FormProps } from "../../../types/User";
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 
 const PersonalInfo = ({ form }: Props) => {

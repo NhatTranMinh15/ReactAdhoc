@@ -1,8 +1,8 @@
 import { FieldErrors, useFieldArray } from 'react-hook-form';
-import { FormDataType, OccupationDataType, OccupationType, FormProps, UserFormDataType, UserFormProps } from '../../../types/User'
+import { OccupationDataType, OccupationType, FormProps, UserFormDataType } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 const name = "occupations"
 const baseOccuation: OccupationDataType = {
@@ -14,7 +14,7 @@ const OccupationInfo = ({ form }: Props) => {
   const { register, control, formState: { errors: err }, getValues } = form;
   const { fields, append, remove } = useFieldArray({ control, name });
   const errors: FieldErrors<UserFormDataType> = err
-  
+
   function validateFromDate(value: string, formValues: UserFormDataType, index: number) {
     const from = new Date(value).valueOf();
     const now = new Date().valueOf();

@@ -1,12 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import User from "./pages/user/user";
-import PersonalInformation from "./pages/user/personalInformation/PersonalInformation";
-import UserKYC from "./pages/user/kyc/kyc";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login/Login";
 import SignUp from "./pages/auth/sign-up/sign-up";
 import ResetPassword from "./pages/auth/reset-password/reset-password";
 import Home from "./pages/home/Home";
+import Preview from "./pages/preview/Preview";
+import PreviewDetail from "./pages/preview/PreviewDetail";
 
 const appRouter = createBrowserRouter([
     {
@@ -20,22 +20,19 @@ const appRouter = createBrowserRouter([
             {
                 path: 'user/:id',
                 element: <User />,
-                // children: [
-                //     {
-                //         path: ':id',
-                //         element: <PersonalInformation />
-                //     },
-                //     {
-                //         path: ':id/kyc',
-                //         element: <UserKYC />
-                //     }
-                // ]
-            }
+            },
+            {
+                path: 'previews',
+                element: <Preview />,
+            },
+            {
+                path: 'previews/:id',
+                element: <PreviewDetail />,
+            },
         ]
     },
     {
         path: 'auth',
-        element: <Auth />,
         children: [
             {
                 path: 'login',

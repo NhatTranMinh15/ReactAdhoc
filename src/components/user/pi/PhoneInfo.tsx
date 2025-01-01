@@ -1,8 +1,8 @@
 import { useFieldArray } from 'react-hook-form';
-import { PhoneDataType, PhoneType, UserFormProps } from '../../../types/User'
+import { PhoneDataType, PhoneType, FormProps } from '../../../types/User'
 import ErrorText from '../../ErrorText';
 
-type Props = UserFormProps & {
+type Props = FormProps & {
 }
 const name = "phones"
 const basePhone: PhoneDataType = {
