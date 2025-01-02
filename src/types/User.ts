@@ -40,13 +40,13 @@ export type ContactDataType = {
 export type EmailDataType = {
     emailAddress: string;
     emailType: EmailType;
-    preferred: number;
+    preferred: "Yes" | "No";
 }
 
 export type PhoneDataType = {
     phoneNumber: string;
     phoneType: PhoneType;
-    preferred: number;
+    preferred: "Yes" | "No";
 }
 export type IDDataType = {
     IDType: IDDocumentType;

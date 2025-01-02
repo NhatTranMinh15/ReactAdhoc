@@ -49,7 +49,6 @@ const User = () => {
     const { user } = useAuth()
     const tabsRef = useRef<TabsRef>(null);
     const [activeTab, setActiveTab] = useState(0);
-    console.log("render form");
 
     const form = useForm<FormDataType>({ values: defaultFromValues(user) });
     const { setFocus, formState: { errors, submitCount } } = form

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { AuthContextValue, Token, UserDetail } from '../types/Auth';
+import { Outlet, useNavigate } from 'react-router';
 
 
 const AuthContext = createContext<AuthContextValue>({ isLoggedIn: false, user: null, async login(user) { }, logout() { }, });
@@ -20,25 +21,37 @@ function getToken() {
 }
 
 async function fetchUserData(token: string) {
-    const user: UserDetail = await fetch('https://dummyjson.com/auth/me', {
+    const response = await fetch('https://dummyjson.com/auth/me', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
         },
-    }).then(res => res.json())
+    });
+    if (!response.ok) {
+        throw new Error()
+    }
+    const user: UserDetail = await response.json();
     return user
 }
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+// export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!getToken());
-    // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
     const [user, setUser] = useState<UserDetail | null>(null);
+    const navigate = useNavigate()
     useEffect(() => {
         const getUserData = async () => {
             const token = getToken()
-            if(token){
-                const userData = await fetchUserData(token.accessToken);
-                setUser(userData);
+            if (token) {
+                try {
+                    const userData = await fetchUserData(token.accessToken);
+                    setUser(userData);
+                } catch (error) {
+                    navigate('/auth/login')
+                }
+            }
+            else {
+                navigate('/auth/login')
             }
         };
 
@@ -60,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
-            {children}
+            <Outlet></Outlet>
         </AuthContext.Provider>
     )
 }

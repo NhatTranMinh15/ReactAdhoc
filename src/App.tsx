@@ -7,15 +7,13 @@ import { AuthProvider } from './context/AuthContext';
 
 function App() {
     useEffect(() => {
-        console.log("init flowbite");
-        
         initFlowbite()
     },);
 
     return (
-        <AuthProvider>
+        // <AuthProvider>
             <RouterProvider router={appRouter} />
-        </AuthProvider>
+        // </AuthProvider>
     )
 }
 

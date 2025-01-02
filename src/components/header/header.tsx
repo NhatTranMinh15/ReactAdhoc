@@ -1,13 +1,13 @@
 import { DarkThemeToggle } from "flowbite-react";
 import { useAuth } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notification from "./Notification";
 import Search from "../Search";
 import Apps from "./Apps";
 import UserIcon from "./UserIcon";
 
 const Header = () => {
-    const { user, logout } = useAuth();
+        const { user, logout } = useAuth();
 
     const links: Array<Record<string, string>> = [];
     return (

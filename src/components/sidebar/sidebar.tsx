@@ -23,11 +23,25 @@ type MenuItem = {
 const Sidebar = () => {
   const { user } = useAuth()
   const menuItems: MenuItem[] = useMemo(() => {
-    return [
-      { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
-      { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Preview', link: "/home/previews", icon: TableCellsIcon, adminOnly: true },
-      { id: "Hn5Yt2Qw9Kj3Xp8", name: 'Results', link: "#", icon: ClipboardDocumentCheckIcon, adminOnly: false },
-    ] as MenuItem[];
+    switch (user?.role) {
+      case "admin":
+      case "moderator":
+        return [
+          { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
+          { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Preview', link: "/home/previews", icon: TableCellsIcon, adminOnly: true },
+          // { id: "Hn5Yt2Qw9Kj3Xp8", name: 'Results', link: "#", icon: ClipboardDocumentCheckIcon, adminOnly: false },
+        ] as MenuItem[];
+    
+      case "user":
+        return [
+          { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
+          // { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Preview', link: "/home/previews", icon: TableCellsIcon, adminOnly: true },
+          // { id: "Hn5Yt2Qw9Kj3Xp8", name: 'Results', link: "#", icon: ClipboardDocumentCheckIcon, adminOnly: false },
+        ] as MenuItem[];
+    
+      default:
+        return []
+    }
   }, [user])
 
   return (

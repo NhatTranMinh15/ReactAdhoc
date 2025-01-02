@@ -50,7 +50,7 @@ const LiabilityInfo = ({ form }: Props) => {
                 <label htmlFor="liabilityType" className="pi-label">Type</label>
                 <select id="liabilityType" className='pi-input'  {...register(`${name}.${index}.liabilityType`, { required: "Income type is required" })}>
                   {
-                    Object.entries(AssetType).map((type) => (
+                    Object.entries(LiabilityType).map((type) => (
                       <option key={type[0]} value={type[0]} className={"option-green"}>{type[1]}</option>
                     ))
                   }

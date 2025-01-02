@@ -6,11 +6,12 @@ import { useAuth } from "../../context/AuthContext";
 
 const Home = () => {
 
-    const {isLoggedIn} = useAuth()
-    
+    const { isLoggedIn } = useAuth()
+
     if (!isLoggedIn) {
         return <Navigate to={"/auth/login"} />
     }
+
     return (
         <>
             <Header />

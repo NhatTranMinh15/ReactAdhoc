@@ -7,27 +7,33 @@ import ResetPassword from "./pages/auth/reset-password/reset-password";
 import Home from "./pages/home/Home";
 import Preview from "./pages/preview/Preview";
 import PreviewDetail from "./pages/preview/PreviewDetail";
+import { AuthProvider } from "./context/AuthContext";
 
 const appRouter = createBrowserRouter([
     {
-        path: '',
-        element: <Navigate to="/home" replace />
-    },
-    {
-        path: 'home',
-        element: <Home />,
+        element: <AuthProvider />,
         children: [
             {
-                path: 'user/:id',
-                element: <User />,
+                path: '',
+                element: <Navigate to="/home" replace />
             },
             {
-                path: 'previews',
-                element: <Preview />,
-            },
-            {
-                path: 'previews/:id',
-                element: <PreviewDetail />,
+                path: 'home',
+                element: <Home />,
+                children: [
+                    {
+                        path: 'user/:id',
+                        element: <User />,
+                    },
+                    {
+                        path: 'previews',
+                        element: <Preview />,
+                    },
+                    {
+                        path: 'previews/:id',
+                        element: <PreviewDetail />,
+                    },
+                ]
             },
         ]
     },

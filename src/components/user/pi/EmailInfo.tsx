@@ -6,7 +6,7 @@ type Props = FormProps & {
 }
 const name = 'emails';
 const baseEmail: EmailDataType = {
-  preferred: 1,
+  preferred: "Yes",
   emailAddress: "",
   emailType: EmailType.WORK
 }
@@ -48,8 +48,8 @@ const EmailInfo = ({ form }: Props) => {
               <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="preferred" className="pi-label">Preferred</label>
                 <select id="preferred" className='pi-input' {...register(`${name}.${index}.preferred`, { required: "Preference type is required" })}>
-                  <option value={1} className={"option-green"}>Yes</option>
-                  <option value={0} className={"option-green"}>No</option>
+                  <option value={"Yes"} className={"option-green"}>Yes</option>
+                  <option value={"No"} className={"option-green"}>No</option>
                 </select>
                 <ErrorText error={errors[name] ? errors[name][index]?.preferred?.message : ""} />
               </div>
