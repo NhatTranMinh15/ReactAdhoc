@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import Header from "../../components/header/header";
+import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/footer";
 import { useAuth } from "../../context/AuthContext";

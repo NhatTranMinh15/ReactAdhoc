@@ -40,23 +40,7 @@ const Login = () => {
     const { login } = useAuth()
     async function handleRegistration() {
         const data = getValues()
-        const remember = data.remember
-        const body = {
-            username: data.username,
-            password: data.password
-        }
-        const response = await fetch("https://dummyjson.com/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        })
-        const responseBody: Token = await response.json()
-        if (remember) {
-            localStorage.setItem("loginUser", JSON.stringify(responseBody))
-        } else {
-            sessionStorage.setItem("loginUser", JSON.stringify(responseBody))
-        }
-        await login(responseBody.accessToken)
+        await login(data)
         return navigate("/")
     }
 

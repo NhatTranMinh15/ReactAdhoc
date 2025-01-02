@@ -1,4 +1,5 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
+import { AddressType } from '../../../types/User';
 
 type Props = {
   preview: Preview
@@ -16,7 +17,7 @@ const ContactPreview = ({ preview }: Props) => {
 
             <div>
               <span className="preview-label">Country:</span>
-              <span>{contact.city}</span>
+              <span>{contact.country}</span>
             </div>
 
             <div>
@@ -36,7 +37,7 @@ const ContactPreview = ({ preview }: Props) => {
 
             <div>
               <span className="preview-label">Type:</span>
-              <span>{contact.addressType}</span>
+              <span>{AddressType[contact.addressType]}</span>
             </div>
           </fieldset>
         ))

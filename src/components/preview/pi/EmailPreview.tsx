@@ -1,4 +1,5 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
+import { EmailType } from '../../../types/User';
 
 type Props = {
   preview: Preview
@@ -21,7 +22,7 @@ const EmailPreview = ({ preview }: Props) => {
 
               <div>
                 <span className="preview-label">Type:</span>
-                <span>{email.emailType}</span>
+                <span>{EmailType[email.emailType]}</span>
               </div>
 
               <div>

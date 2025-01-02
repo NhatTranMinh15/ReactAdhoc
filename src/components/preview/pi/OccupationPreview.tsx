@@ -1,4 +1,5 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
+import { OccupationType } from '../../../types/User';
 type Props = {
   preview: Preview
 }
@@ -14,7 +15,7 @@ const OccupationPreview = ({ preview }: Props) => {
             <legend className='preview-legend'>{`Occupation #${index + 1}`}</legend>
               <div>
                 <span className="preview-label">Type:</span>
-                <span>{occupation.occupationType}</span>
+                <span>{OccupationType[occupation.occupationType]}</span>
               <div>
               </div>
                 <span className="preview-label">Start Date:</span>

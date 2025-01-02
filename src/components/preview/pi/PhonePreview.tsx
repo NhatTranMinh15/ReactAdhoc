@@ -1,4 +1,5 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
+import { PhoneType } from '../../../types/User';
 
 type Props = {
   preview: Preview
@@ -20,7 +21,7 @@ const PhonePreview = ({ preview }: Props) => {
 
               <div>
                 <span className="preview-label">Type:</span>
-                <span>{phone.phoneType}</span>
+                <span>{PhoneType[phone.phoneType]}</span>
               </div>
 
               <div>

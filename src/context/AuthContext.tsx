@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { AuthContextValue, Token, UserDetail } from '../types/Auth';
+import { AuthContextValue, LoginType, Token, UserDetail } from '../types/Auth';
 import { Outlet, useNavigate } from 'react-router';
 
 
@@ -58,17 +58,35 @@ export const AuthProvider = () => {
         getUserData();
     }, []);
 
-    async function login(token: string) {
-        const userData = await fetchUserData(token);
+    async function login(data: LoginType) {
+        const remember = data.remember
+        const body = {
+            username: data.username,
+            password: data.password
+        }
+        const response = await fetch("https://dummyjson.com/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const responseBody: Token = await response.json()
+        
+        if (remember) {
+            localStorage.setItem("loginUser", JSON.stringify(responseBody))
+        } else {
+            sessionStorage.setItem("loginUser", JSON.stringify(responseBody))
+        }
+
+        const userData = await fetchUserData(responseBody.accessToken);
         setUser(userData);
         setIsLoggedIn(true)
     }
 
     function logout() {
-        setUser(null)
-        setIsLoggedIn(false)
         sessionStorage.removeItem("loginUser")
         localStorage.removeItem("loginUser")
+        setUser(null)
+        setIsLoggedIn(false)
     }
 
     return (

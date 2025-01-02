@@ -15,7 +15,7 @@ export type Token = {
 export type AuthContextValue = {
     isLoggedIn: boolean;
     user: UserDetail | null,
-    login: (token: string) => Promise<void>;
+    login: (data: LoginType) => Promise<void>;
     logout: () => void;
 }
 

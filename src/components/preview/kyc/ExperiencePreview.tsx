@@ -1,4 +1,4 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
 import { ExperienceInFinanceType, FormProps, RiskToleranceType } from '../../../types/User';
 import ErrorText from '../../ErrorText';
 
@@ -14,12 +14,12 @@ const ExperiencePreview = ({ preview }: Props) => {
       <fieldset>
           <div>
             <span className="preview-label">Experience in Financial Markets:</span>
-            <span>{experience.experienceInFinance}</span>
+            <span>{ExperienceInFinanceType[experience.experienceInFinance]}</span>
           </div>
 
           <div>
             <span className="preview-label">Risk Tolerance:</span>
-            <span>{experience.riskTolerance}</span>
+            <span>{RiskToleranceType[experience.riskTolerance]}</span>
         </div>
       </fieldset>
     </div>

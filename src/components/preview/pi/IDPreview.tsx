@@ -1,4 +1,5 @@
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
+import { IDDocumentType } from '../../../types/User';
 type Props = {
   preview: Preview
 }
@@ -13,7 +14,7 @@ const IDPreview = ({ preview }: Props) => {
             <legend className='preview-legend'>{`Identification Document #${index+1}`}</legend>
             <div>
               <span className="preview-label">Type:</span>
-              <span>{id.IDType}</span>
+              <span>{IDDocumentType[id.IDType]}</span>
             </div>
             <div>
               <span className="preview-label">Expiry Date:</span>

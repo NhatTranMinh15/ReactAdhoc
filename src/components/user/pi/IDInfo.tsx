@@ -22,10 +22,12 @@ const IDInfo = ({ form }: Props) => {
   }
 
   useEffect(() => {
-    append(baseID)
-    return () => { remove(0) }
+    if (fields.length == 0) {
+      append(baseID)
+      return () => { remove(0) }
+    }
   }, [])
-  
+
   return (
     <div className='p-3 border border-zinc-200 rounded-lg'>
       <h3 className="mb-4 text-xl font-semibold">Identification Documents</h3>

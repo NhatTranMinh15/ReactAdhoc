@@ -7,7 +7,7 @@ import Apps from "./Apps";
 import UserIcon from "./UserIcon";
 
 const Header = () => {
-        const { user, logout } = useAuth();
+    const { user, logout } = useAuth();
 
     const links: Array<Record<string, string>> = [];
     return (
@@ -31,25 +31,8 @@ const Header = () => {
                                 <Notification />
                                 <Apps />
                                 <DarkThemeToggle />
-                                <div id="tooltip-toggle" role="tooltip"
-                                    className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
-                                    data-popper-placement="bottom" style={{
-                                        position: "absolute",
-                                        inset: "0px auto auto 0px",
-                                        margin: "0px",
-                                        transform: "translate3d(1571.5px, 63px, 0px)"
-                                    }}>
-                                    Toggle dark mode
-                                    <div className="tooltip-arrow" data-popper-arrow="" style={{
-                                        position: "absolute",
-                                        left: "0px",
-                                        transform: "translate3d(68.5px, 0px, 0px)"
-                                    }}></div>
-                                </div>
-
                                 <UserIcon user={user} />
                                 <button className="button" role="menuitem" onClick={logout}>Sign out</button>
-
                             </div>
                         ) : null
                     }

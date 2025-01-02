@@ -1,7 +1,7 @@
 import { useFieldArray, useWatch } from 'react-hook-form';
 import { FormProps } from '../../../types/User'
 import { useEffect } from 'react';
-import { Preview } from '../../../types/Preview';
+import { Preview } from '../../../types/Submission';
 
 type Props = {
     preview: Preview

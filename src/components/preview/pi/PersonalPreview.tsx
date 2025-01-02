@@ -1,4 +1,4 @@
-import { Preview } from "../../../types/Preview"
+import { Preview } from "../../../types/Submission"
 
 type Props = {
   preview: Preview
