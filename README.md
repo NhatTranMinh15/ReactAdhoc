@@ -1,13 +1,21 @@
-# React Adhoc
-
+# React Adhoc - Simple KYC
+## Technologies
+- React v18
+- React Router v6
+- Tailwind
+- Flowbite and [Flowbite Admin Template](https://github.com/themesberg/flowbite-admin-dashboard/tree/main)
+- [SWR](https://swr.vercel.app/)
+- [React-hook-form](https://react-hook-form.com/)
+- [Heroicons](https://heroicons.com/)
+  
 ## Getting Started
-First, install all dependencies
+Install all dependencies
 
 ```bash
 npm i
 ```
 
-Second, run the development server:
+Run the development server:
 
 ```bash
 npm run start
@@ -37,7 +45,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### 3. View all submissions ***(For `admin` only)***
 - Choose *Submissions* in the sidebar or navigate to [http://localhost:3000/home/submissions](http://localhost:3000/home/submissions).
-- Click on one specific row to view submissions preview.
 - Click corresponded `Approve` button to aprrove that submission.
 - Click corresponded `Reject` button to reject that submission.
 
@@ -46,8 +53,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Change between **Info** and **KYC** tab to view.
 - Use `To ___ tab` for quick tab change.
 - Click `Approve` button to aprrove submission.
-- Click `Reject` button to reject submission.
-\*Redirect to all submissions page aftter action*
+- Click `Reject` button to reject submission.\
+*Redirect to all submissions page aftter action*
 
 ### 5. Sign out
 - Click `Sign out` button in the header.
