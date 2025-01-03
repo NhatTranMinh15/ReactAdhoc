@@ -1,13 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import User from "./pages/user/User";
-import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login/Login";
 import SignUp from "./pages/auth/sign-up/sign-up";
 import ResetPassword from "./pages/auth/reset-password/reset-password";
 import Home from "./pages/home/Home";
-import Preview from "./pages/submission/Submissions";
-import PreviewDetail from "./pages/submission/SubmissionDetail";
 import { AuthProvider } from "./context/AuthContext";
+import Submissions from "./pages/submission/Submissions";
+import SubmissionDetail from "./pages/submission/SubmissionDetail";
 
 const appRouter = createBrowserRouter([
     {
@@ -22,16 +21,20 @@ const appRouter = createBrowserRouter([
                 element: <Home />,
                 children: [
                     {
+                        path: 'user/',
+                        element: <User />,
+                    },
+                    {
                         path: 'user/:id',
                         element: <User />,
                     },
                     {
-                        path: 'previews',
-                        element: <Preview />,
+                        path: 'submissions',
+                        element: <Submissions />,
                     },
                     {
-                        path: 'previews/:id',
-                        element: <PreviewDetail />,
+                        path: 'submissions/:id',
+                        element: <SubmissionDetail />,
                     },
                 ]
             },

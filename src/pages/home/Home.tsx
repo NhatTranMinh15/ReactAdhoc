@@ -3,7 +3,12 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/footer";
 import { useAuth } from "../../context/AuthContext";
-
+import Breadcrumb from "../../components/Breadcrumb"
+import { BreadcrumbType } from '../../types/General'
+import { HomeIcon } from '@heroicons/react/24/solid'
+const breadcrumb: BreadcrumbType[] = [
+    { href: '/home', icon: HomeIcon, name: 'Home' },
+];
 const Home = () => {
 
     const { isLoggedIn } = useAuth()

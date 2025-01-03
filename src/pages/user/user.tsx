@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Tabs, TabsRef } from "flowbite-react";
 import { ChevronDoubleRightIcon, HomeIcon, UserPlusIcon, CreditCardIcon } from "@heroicons/react/24/solid";
@@ -16,6 +16,8 @@ import LiabilityInfo from "../../components/user/kyc/LiabilityInfo";
 import SourceOfWealthInfo from "../../components/user/kyc/SourceOfWealthInfo";
 import NetWothInfo from "../../components/user/kyc/NetWothInfo";
 import ExperienceInfo from "../../components/user/kyc/ExperienceInfo";
+import Breadcrumb from "../../components/Breadcrumb"
+import { BreadcrumbType } from '../../types/General';
 
 function setTab(key: keyof FormDataType, value: any[] | FormDataType, tabsRef: RefObject<TabsRef>, index: number) {
     let focus = key;
@@ -31,7 +33,11 @@ async function fetcher(url: string) {
     const result: FormDataType = await (await fetch(url)).json();
     return result
 }
-
+const breadcrumb: BreadcrumbType[] = [
+    { href: '/home', icon: HomeIcon, name: 'Home' },
+    { href: '/home/user', icon: undefined, name: 'User' },
+    { href: `/home/user`, icon: undefined, name: "Personal Information" },
+];
 const User = () => {
     const tabsRef = useRef<TabsRef>(null);
     const [activeTab, setActiveTab] = useState(0);
@@ -93,23 +99,14 @@ const User = () => {
         }
         const body = await result.json();
         console.log(body);
-        
+
         await mutate(body)
     }
 
     return (
         <div className="grid grid-cols-1 px-4 pt-6 xl:gap-4 dark:bg-gray-900">
-            <div className="mb-4 col-span-full xl:mb-2">
-                <nav className="flex gap-3 mb-5" aria-label="Breadcrumb">
-                    <HomeIcon width={15} />
-                    <a href="/home" className="breadcrumb">Home</a>
-                    <ChevronDoubleRightIcon width={15} />
-                    <a href="/home/user" className="breadcrumb">Users</a>
-                    <ChevronDoubleRightIcon width={15} />
-                    <a href="#" className="breadcrumb" aria-current="page">Personal Information</a>
-                </nav>
-                <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Personal Information</h1>
-            </div>
+            <Breadcrumb data={breadcrumb}></Breadcrumb>
+            <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white my-6">Personal Information</h1>
             <form onSubmit={form.handleSubmit(handleFormSubmit)}>
                 <Tabs aria-label="Default tabs" variant="default" ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
                     <Tabs.Item active title="Personal Information" icon={UserPlusIcon} >
