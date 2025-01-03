@@ -37,14 +37,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Select `Remember me`.
 
 ### 2. Change your personal information
-- Choose *Info* in the sidebar or navigate to [http://localhost:3000/home/user](http://localhost:3000/home/user).
+- Choose *Info* in the sidebar or navigate to [http://localhost:3000/home/user/info](http://localhost:3000/home/user/info).
 - Change between **Personal Information** and **KYC** tab.
 - Add or remove sections by `Add ___` or `×` buttons according to your need.
 - **Fill in all fields**.
 - Click `Submit` button to submit form.
 
 ### 3. View all submissions ***(For `admin` only)***
-- Choose *Submissions* in the sidebar or navigate to [http://localhost:3000/home/submissions](http://localhost:3000/home/submissions).
+- Choose *Submissions* in the sidebar or navigate to [http://localhost:3000/home/officer/submissions](http://localhost:3000/home/officer/submissions).
 - Click corresponded `Approve` button to aprrove that submission.
 - Click corresponded `Reject` button to reject that submission.
 
