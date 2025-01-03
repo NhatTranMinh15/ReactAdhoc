@@ -36,13 +36,13 @@ async function fetcher(url: string) {
 
 const breadcrumb: BreadcrumbType[] = [
     { href: '/home', icon: HomeIcon, name: 'Home' },
-    { href: '/home/user', icon: undefined, name: 'User' },
-    { href: `/home/user`, icon: undefined, name: "Personal Information" },
+    { href: '/home/user/info', icon: undefined, name: 'User' },
+    { href: `/home/user/info`, icon: undefined, name: "Personal Information" },
 ];
 
-const User = () => {
+const Info = () => {
     const tabsRef = useRef<TabsRef>(null);
-    const [_, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState(0);
 
     const { data: user } = useSWR(`https://dummyjson.com/c/00d9-a33a-406b-b4d6?delay=1000`, fetcher, {
         revalidateOnFocus: false
@@ -139,4 +139,4 @@ const User = () => {
     )
 }
 
-export default User;
+export default Info;

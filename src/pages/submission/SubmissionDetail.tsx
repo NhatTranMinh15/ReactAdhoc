@@ -32,7 +32,7 @@ const SubmissionDetail = (props: Props) => {
   const navigate = useNavigate()
 
   const tabsRef = useRef<TabsRef>(null);
-  const [_, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
 
   const { data: preview } = useSWR(`https://dummyjson.com/c/d2b2-55e5-4f29-903e`, fetcher, {
     revalidateOnFocus: false
@@ -40,8 +40,8 @@ const SubmissionDetail = (props: Props) => {
 
   const breadcrumb: BreadcrumbType[] = useMemo(() => [
     { href: '/home', icon: HomeIcon, name: 'Home' },
-    { href: '/home/submissions', icon: undefined, name: 'Submissions' },
-    { href: `/home/submissions/${id}`, icon: undefined, name: `${id}` },
+    { href: '/home/officer/submissions', icon: undefined, name: 'Submissions' },
+    { href: `/home/officer/submissions/${id}`, icon: undefined, name: `${id}` },
   ], [id])
 
   return (
@@ -76,8 +76,8 @@ const SubmissionDetail = (props: Props) => {
         </Tabs>
       }
       <div className='flex gap-3'>
-        <button className="button button-green w-fit " onClick={async (e) => { await approveSubmission(e, id as string); navigate("/home/submissions") }}>Approve</button>
-        <button className="button button-red w-fit" onClick={async (e) => { await rejectSubmission(e, id as string); navigate("/home/submissions") }}>Reject</button>
+        <button className="button button-green w-fit " onClick={async (e) => { await approveSubmission(e, id as string); navigate("/home/officer/submissions") }}>Approve</button>
+        <button className="button button-red w-fit" onClick={async (e) => { await rejectSubmission(e, id as string); navigate("/home/officer/submissions") }}>Reject</button>
       </div>
     </div >
   )

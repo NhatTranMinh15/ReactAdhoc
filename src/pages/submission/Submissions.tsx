@@ -17,7 +17,7 @@ const headers: Header[] = [
 
 const breadcrumb: BreadcrumbType[] = [
   { href: '/home', icon: HomeIcon, name: 'Home' },
-  { href: '/home/submissions', icon: undefined, name: 'Submissions' },
+  { href: '/home/officer/submissions', icon: undefined, name: 'Submissions' },
 ];
 
 export async function approveSubmission(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string | number): Promise<void> {

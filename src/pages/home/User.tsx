@@ -1,13 +1,11 @@
 import { Navigate, Outlet } from 'react-router'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext'
 
-type Props = {
+type Props = {}
 
-}
-
-const Admin = (props: Props) => {
+const User = (props: Props) => {
     const { user } = useAuth()
-    if (user?.role === 'user') {
+    if (user?.role !== 'user') {
         return <Navigate to={'/home'} />
     }
     return (
@@ -15,4 +13,4 @@ const Admin = (props: Props) => {
     )
 }
 
-export default Admin
+export default User

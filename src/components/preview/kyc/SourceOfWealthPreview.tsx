@@ -13,7 +13,7 @@ const SourceOfWealthPreview = ({ preview }: Props) => {
       {
         sourcesOfWealth.map((sow, index) => (
           <fieldset key={sow.sourceOfWealthType} className='preview-fieldset'>
-            <legend className="preview-legend">{`Source of Wealth #${index}`}</legend>
+            <legend className="preview-legend">{`Source of Wealth #${index + 1}`}</legend>
             <div>
               <span className="preview-label">Type:</span>
               <span>{SourceOfWealthType[sow.sourceOfWealthType]}</span>

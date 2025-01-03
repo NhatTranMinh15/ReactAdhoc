@@ -11,12 +11,11 @@ const Sidebar = () => {
       case "admin":
       case "moderator":
         return [
-          { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
-          { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Submissions', link: "/home/submissions", icon: TableCellsIcon, adminOnly: true },
+          { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Submissions', link: "/home/officer/submissions", icon: TableCellsIcon, adminOnly: true },
         ]
       case "user":
         return [
-          { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
+          { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/info`, icon: UserIcon, adminOnly: false },
         ]
       default:
         return []

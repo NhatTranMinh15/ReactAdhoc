@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import User from "./pages/user/User";
 import Login from "./pages/auth/login/Login";
 import SignUp from "./pages/auth/sign-up/sign-up";
 import ResetPassword from "./pages/auth/reset-password/reset-password";
@@ -7,7 +6,10 @@ import Home from "./pages/home/Home";
 import { AuthProvider } from "./context/AuthContext";
 import Submissions from "./pages/submission/Submissions";
 import SubmissionDetail from "./pages/submission/SubmissionDetail";
-import Admin from "./pages/home/Admin";
+import Admin from "./pages/home/Officer";
+import Info from "./pages/info/Info";
+import User from "./pages/home/User";
+import Error from "./pages/home/Error";
 
 const appRouter = createBrowserRouter([
     {
@@ -15,22 +17,24 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <Navigate to="/home" replace />
+                element: <Navigate to="/home" replace />,
             },
             {
-                path: 'home',
+                path: '/home',
                 element: <Home />,
                 children: [
                     {
-                        path: 'user/',
+                        path: "user",
                         element: <User />,
+                        children: [
+                            {
+                                path: 'info/',
+                                element: <Info />,
+                            },
+                        ]
                     },
                     {
-                        path: 'user/:id',
-                        element: <User />,
-                    },
-                    {
-                        path: "",
+                        path: "officer",
                         element: <Admin />,
                         children: [
                             {
@@ -44,7 +48,8 @@ const appRouter = createBrowserRouter([
                         ]
                     }
 
-                ]
+                ],
+                errorElement: <Error />
             },
             {
                 path: 'auth',
@@ -61,11 +66,12 @@ const appRouter = createBrowserRouter([
                         path: 'reset-password',
                         element: <ResetPassword />
                     }
-                ]
-
+                ],
             }
-        ]
+        ],
+        errorElement: <Error />
     },
+
 ])
 
 
