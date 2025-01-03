@@ -14,6 +14,7 @@ const headers: Header[] = [
   { name: "Date", value: "createdAt", isCurrentlySorted: false, colStyle: {}, hiddenOnSmall: false },
   { name: "Action", value: "action", isCurrentlySorted: false, colStyle: { maxWidth: "15ch" }, hiddenOnSmall: false },
 ]
+
 const breadcrumb: BreadcrumbType[] = [
   { href: '/home', icon: HomeIcon, name: 'Home' },
   { href: '/home/submissions', icon: undefined, name: 'Submissions' },
@@ -25,15 +26,14 @@ export async function approveSubmission(e: React.MouseEvent<HTMLButtonElement, M
 
   // 50-50 chance of success
   // TODO: Remove
-  if (Math.random() > 0.5) {
-    url = `https://dummyjson.com/users/1`
-  }
+  if (Math.random() > 0.5) { url = `https://dummyjson.com/users/1` }
 
   const response = await fetch(url, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status: 'Approved' })
   })
+
   if (response.ok) {
     alert(`Submission ${id} approved`)
   } else {
@@ -47,11 +47,10 @@ export async function rejectSubmission(e: React.MouseEvent<HTMLButtonElement, Mo
 
   // 50-50 chance of success
   // TODO: Remove
-  if (Math.random() > 0.5) {
-    url = `https://dummyjson.com/users/1`
-  }
+  if (Math.random() > 0.5) { url = `https://dummyjson.com/users/1` }
 
-  const response = await fetch(url, { method: 'DELETE', })
+  const response = await fetch(url, { method: 'DELETE', });
+
   if (response.ok) {
     alert(`Submission ${id} deleted`)
   } else {
@@ -76,7 +75,7 @@ const Submissions = (props: Props) => {
   if (isLoading) {
     return (
       <div className="container mx-auto p-6">
-        <Breadcrumb data={breadcrumb}></Breadcrumb>
+        <Breadcrumb data={breadcrumb}/>
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">KYC Submission</h1>
         <div>Loading submissions ...</div>
       </div>
@@ -84,7 +83,7 @@ const Submissions = (props: Props) => {
   }
   return (
     <div className="container mx-auto p-6">
-      <Breadcrumb data={breadcrumb}></Breadcrumb>
+      <Breadcrumb data={breadcrumb}/>
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white my-6">KYC Submission</h1>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow-md">

@@ -1,15 +1,11 @@
 import { DarkThemeToggle } from "flowbite-react";
 import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
-import Notification from "./Notification";
+import { Link } from "react-router-dom";
 import Search from "../Search";
-import Apps from "./Apps";
-import UserIcon from "./UserIcon";
 
 const Header = () => {
     const { user, logout } = useAuth();
 
-    const links: Array<Record<string, string>> = [];
     return (
         <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -28,15 +24,11 @@ const Header = () => {
                     {
                         user ? (
                             <div className="flex items-center">
-                                <Notification />
-                                <Apps />
                                 <DarkThemeToggle />
-                                <UserIcon user={user} />
                                 <button className="button" role="menuitem" onClick={logout}>Sign out</button>
                             </div>
                         ) : null
                     }
-
                 </div>
             </div>
         </nav>

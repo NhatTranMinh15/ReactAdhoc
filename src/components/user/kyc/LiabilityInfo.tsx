@@ -1,5 +1,5 @@
 import { useFieldArray } from 'react-hook-form';
-import { AssetType, FormProps, LiabilityDataType, LiabilityType } from '../../../types/User';
+import { FormProps, LiabilityDataType, LiabilityType } from '../../../types/User';
 import ErrorText from '../../ErrorText';
 
 type Props = FormProps & {

@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import { AuthProvider } from "./context/AuthContext";
 import Submissions from "./pages/submission/Submissions";
 import SubmissionDetail from "./pages/submission/SubmissionDetail";
+import Admin from "./pages/home/Admin";
 
 const appRouter = createBrowserRouter([
     {
@@ -29,13 +30,20 @@ const appRouter = createBrowserRouter([
                         element: <User />,
                     },
                     {
-                        path: 'submissions',
-                        element: <Submissions />,
-                    },
-                    {
-                        path: 'submissions/:id',
-                        element: <SubmissionDetail />,
-                    },
+                        path: "",
+                        element: <Admin />,
+                        children: [
+                            {
+                                path: 'submissions',
+                                element: <Submissions />,
+                            },
+                            {
+                                path: 'submissions/:id',
+                                element: <SubmissionDetail />,
+                            },
+                        ]
+                    }
+
                 ]
             },
             {

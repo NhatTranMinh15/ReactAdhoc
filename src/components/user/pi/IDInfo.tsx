@@ -22,7 +22,7 @@ const IDInfo = ({ form }: Props) => {
   }
 
   useEffect(() => {
-    if (fields.length == 0) {
+    if (fields.length === 0) {
       append(baseID)
       return () => { remove(0) }
     }
@@ -37,7 +37,7 @@ const IDInfo = ({ form }: Props) => {
             <legend className='text-lg font-medium border border-zinc-200 rounded-lg px-3'>
               Identification Document
               {
-                index != 0 &&
+                index !== 0 &&
                 <button type="button" className='ps-3 font-bold hover:text-red-600' onClick={() => removeFields(index)}>&times;</button>
               }
             </legend>

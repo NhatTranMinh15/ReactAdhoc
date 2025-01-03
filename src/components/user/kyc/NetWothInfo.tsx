@@ -1,4 +1,4 @@
-import { useFieldArray, useWatch } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 import { FormProps } from '../../../types/User'
 import { useEffect } from 'react';
 

@@ -1,7 +1,7 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Tabs, TabsRef } from "flowbite-react";
-import { ChevronDoubleRightIcon, HomeIcon, UserPlusIcon, CreditCardIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, UserPlusIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import useSWR from "swr";
 import { FormDataType } from "../../types/User";
 import PersonalInfo from "../../components/user/pi/PersonalInfo";
@@ -33,16 +33,18 @@ async function fetcher(url: string) {
     const result: FormDataType = await (await fetch(url)).json();
     return result
 }
+
 const breadcrumb: BreadcrumbType[] = [
     { href: '/home', icon: HomeIcon, name: 'Home' },
     { href: '/home/user', icon: undefined, name: 'User' },
     { href: `/home/user`, icon: undefined, name: "Personal Information" },
 ];
+
 const User = () => {
     const tabsRef = useRef<TabsRef>(null);
-    const [activeTab, setActiveTab] = useState(0);
+    const [_, setActiveTab] = useState(0);
 
-    const { data: user, mutate } = useSWR(`https://dummyjson.com/c/00d9-a33a-406b-b4d6?delay=1000`, fetcher, {
+    const { data: user } = useSWR(`https://dummyjson.com/c/00d9-a33a-406b-b4d6?delay=1000`, fetcher, {
         revalidateOnFocus: false
     })
 
@@ -50,6 +52,7 @@ const User = () => {
     const { setFocus, formState: { errors, submitCount, isSubmitting } } = form
 
     useEffect(() => {
+        // Change tab and focus on error field for every submit
         const firstError = Object.entries(errors)[0] as [keyof FormDataType, FormDataType | any[]]
         if (firstError) {
             const { 0: key, 1: value } = firstError
@@ -80,6 +83,8 @@ const User = () => {
                 default:
                     break;
             }
+
+            // Delay focus
             const timeout = setTimeout(() => {
                 setFocus(focus, { shouldSelect: true })
             }, 0);
@@ -99,13 +104,11 @@ const User = () => {
         }
         const body = await result.json();
         console.log(body);
-
-        await mutate(body)
     }
 
     return (
         <div className="grid grid-cols-1 px-4 pt-6 xl:gap-4 dark:bg-gray-900">
-            <Breadcrumb data={breadcrumb}></Breadcrumb>
+            <Breadcrumb data={breadcrumb} />
             <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white my-6">Personal Information</h1>
             <form onSubmit={form.handleSubmit(handleFormSubmit)}>
                 <Tabs aria-label="Default tabs" variant="default" ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>

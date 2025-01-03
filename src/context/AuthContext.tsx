@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { AuthContextValue, LoginType, Token, UserDetail } from '../types/Auth';
 import { Outlet, useNavigate } from 'react-router';
 
@@ -70,7 +70,7 @@ export const AuthProvider = () => {
             body: JSON.stringify(body)
         })
         const responseBody: Token = await response.json()
-        
+
         if (remember) {
             localStorage.setItem("loginUser", JSON.stringify(responseBody))
         } else {

@@ -1,4 +1,4 @@
-import { ChevronDoubleRightIcon, CreditCardIcon, HomeIcon, UserPlusIcon } from '@heroicons/react/24/solid'
+import { CreditCardIcon, HomeIcon, UserPlusIcon } from '@heroicons/react/24/solid'
 import { Tabs, TabsRef } from 'flowbite-react'
 import useSWR from 'swr'
 import PersonalPreview from '../../components/preview/pi/PersonalPreview';
@@ -32,7 +32,7 @@ const SubmissionDetail = (props: Props) => {
   const navigate = useNavigate()
 
   const tabsRef = useRef<TabsRef>(null);
-  const [activeTab, setActiveTab] = useState(0);
+  const [_, setActiveTab] = useState(0);
 
   const { data: preview } = useSWR(`https://dummyjson.com/c/d2b2-55e5-4f29-903e`, fetcher, {
     revalidateOnFocus: false
@@ -46,7 +46,7 @@ const SubmissionDetail = (props: Props) => {
 
   return (
     <div className="grid grid-cols-1 px-4 pt-6 xl:gap-4 dark:bg-gray-900">
-      <Breadcrumb data={breadcrumb}></Breadcrumb>
+      <Breadcrumb data={breadcrumb} />
       <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white my-6">Preview</h1>
       {
         preview &&

@@ -1,4 +1,4 @@
-import { AddressType, AssetDataType, AssetType, ContactDataType, EmailDataType, EmailType, ExperienceDataType, ExperienceInFinanceType, IDDataType, IDDocumentType, IncomeDataType, IncomeType, LiabilityDataType, LiabilityType, OccupationDataType, OccupationType, PhoneDataType, PhoneType, RiskToleranceType, SourceOfWealthDataType, SourceOfWealthType } from "./User";
+import { AddressType, AssetDataType, AssetType, ContactDataType, EmailDataType, EmailType, ExperienceInFinanceType, IDDataType, IDDocumentType, IncomeDataType, IncomeType, LiabilityDataType, LiabilityType, OccupationDataType, OccupationType, PhoneDataType, PhoneType, RiskToleranceType, SourceOfWealthDataType, SourceOfWealthType } from "./User";
 
 export type Submission = {
     id: number,

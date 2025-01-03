@@ -1,24 +1,8 @@
 import { Link } from "react-router-dom";
-import { TableCellsIcon, ClipboardDocumentCheckIcon, UserIcon } from '@heroicons/react/24/solid'
+import { TableCellsIcon, UserIcon } from '@heroicons/react/24/solid'
 import { useAuth } from "../../context/AuthContext";
 import { useMemo } from "react";
-
-type IconSVGProps = React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & React.RefAttributes<SVGSVGElement>
-type IconProps = IconSVGProps & {
-  title?: string
-  titleId?: string
-}
-
-type Icon = React.FC<IconProps>
-
-type MenuItem = {
-  id: string,
-  name: string;
-  link: string;
-  icon: string | Icon;
-  adminOnly: boolean;
-}
-
+import { MenuItem } from "../../types/General";
 
 const Sidebar = () => {
   const { user } = useAuth()
@@ -29,14 +13,11 @@ const Sidebar = () => {
         return [
           { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
           { id: "Pq4Xj7Lm1Vb8Zr6", name: 'Submissions', link: "/home/submissions", icon: TableCellsIcon, adminOnly: true },
-          // { id: "Hn5Yt2Qw9Kj3Xp8", name: 'Results', link: "#", icon: ClipboardDocumentCheckIcon, adminOnly: false },
-        ] as MenuItem[];
-    
+        ]
       case "user":
         return [
           { id: "Xy2Zk8LmN4Qp7Rt", name: 'Info', link: `/home/user/${user?.id}`, icon: UserIcon, adminOnly: false },
-        ] as MenuItem[];
-    
+        ]
       default:
         return []
     }

@@ -11,7 +11,7 @@ const baseOccuation: OccupationDataType = {
   toDate: "",
 }
 const OccupationInfo = ({ form }: Props) => {
-  const { register, control, formState: { errors: err }, getValues } = form;
+  const { register, control, formState: { errors: err } } = form;
   const { fields, append, remove } = useFieldArray({ control, name });
   const errors: FieldErrors<UserFormDataType> = err
 

@@ -1,3 +1,19 @@
+export type IconSVGProps = React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & React.RefAttributes<SVGSVGElement>
+export type IconProps = IconSVGProps & {
+    title?: string
+    titleId?: string
+}
+
+export type Icon = React.FC<IconProps>
+
+export type MenuItem = {
+    id: string,
+    name: string;
+    link: string;
+    icon: string | Icon;
+    adminOnly: boolean;
+}
+
 export type Header = {
     name: string,
     value: string,
