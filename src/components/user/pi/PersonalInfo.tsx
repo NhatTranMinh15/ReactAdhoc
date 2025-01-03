@@ -5,8 +5,8 @@ type Props = FormProps & {
 }
 
 const PersonalInfo = ({ form }: Props) => {
-  const {register, setValue, formState: { errors } } = form;
-  
+  const { register, setValue, formState: { errors } } = form;
+
   function calculateAge(value: string) {
     const dob = new Date(value);
     const now = new Date();
@@ -18,7 +18,6 @@ const PersonalInfo = ({ form }: Props) => {
     <div className='p-3 border border-zinc-200 rounded-lg'>
       <h3 className="mb-4 text-xl font-semibold">Basic information</h3>
       <fieldset className="grid grid-cols-6 gap-6">
-
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="firstName" className="pi-label">First Name</label>
           <input type="text" id="firstName" className="pi-input" placeholder="Enter your first name"  {...register("firstName", { required: "First name cannot be empty" })} />

@@ -28,12 +28,12 @@ code {
   @apply py-2 px-5 border rounded-lg border-black dark:border-white duration-150
 }
 
-.button:hover {
+.button:hover:enabled {
   @apply underline duration-150 bg-zinc-300 dark:bg-zinc-600
 }
 
 .button:disabled {
-  @apply opacity-30
+  @apply opacity-50
 }
 
 .button-green {
@@ -41,7 +41,7 @@ code {
   @apply dark:bg-green-600 dark:text-white;
 }
 
-.button-green:hover {
+.button-green:hover:enabled {
   @apply bg-emerald-200 dark:bg-green-600
 }
 
@@ -51,7 +51,7 @@ code {
   @apply dark:bg-red-600 dark:text-white;
 }
 
-.button-red:hover {
+.button-red:hover:enabled {
   @apply bg-red-200 dark:bg-red-500
 }
 
@@ -61,14 +61,14 @@ code {
   @apply dark:bg-yellow-600 dark:text-white;
 }
 
-.button-yellow:hover {
+.button-yellow:hover:enabled {
   @apply bg-yellow-100 dark:bg-yellow-500
 }
 
 /* Yellow button */
 .button-blue {
   @apply text-white bg-primary-700;
-  @apply hover:bg-primary-800 focus:ring-4 focus:ring-primary-300;
+  @apply hover:enabled:bg-primary-800 focus:ring-4 focus:ring-primary-300;
   @apply dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800;
 }
 

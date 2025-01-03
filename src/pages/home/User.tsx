@@ -5,9 +5,9 @@ type Props = {}
 
 const User = (props: Props) => {
     const { user } = useAuth()
-    if (user?.role !== 'user') {
-        return <Navigate to={'/home'} />
-    }
+    // if (user?.role !== 'user') {
+    //     return <Navigate to={'/home'} />
+    // }
     return (
         <Outlet />
     )

@@ -18,6 +18,7 @@ import NetWothInfo from "../../components/user/kyc/NetWothInfo";
 import ExperienceInfo from "../../components/user/kyc/ExperienceInfo";
 import Breadcrumb from "../../components/Breadcrumb"
 import { BreadcrumbType } from '../../types/General';
+import { useAuth } from "../../context/AuthContext";
 
 function setTab(key: keyof FormDataType, value: any[] | FormDataType, tabsRef: RefObject<TabsRef>, index: number) {
     let focus = key;
@@ -36,19 +37,19 @@ async function fetcher(url: string) {
 
 const breadcrumb: BreadcrumbType[] = [
     { href: '/home', icon: HomeIcon, name: 'Home' },
-    { href: '/home/user/info', icon: undefined, name: 'User' },
     { href: `/home/user/info`, icon: undefined, name: "Personal Information" },
 ];
 
 const Info = () => {
     const tabsRef = useRef<TabsRef>(null);
     const [activeTab, setActiveTab] = useState(0);
-
-    const { data: user } = useSWR(`https://dummyjson.com/c/00d9-a33a-406b-b4d6?delay=1000`, fetcher, {
+    const { user } = useAuth()
+    const isAdmin = user?.role !== "user"
+    const { data } = useSWR(`https://dummyjson.com/c/00d9-a33a-406b-b4d6?delay=1000`, fetcher, {
         revalidateOnFocus: false
     })
 
-    const form = useForm<FormDataType>({ values: user });
+    const form = useForm<FormDataType>({ values: data });
     const { setFocus, formState: { errors, submitCount, isSubmitting } } = form
 
     useEffect(() => {
@@ -113,27 +114,31 @@ const Info = () => {
             <form onSubmit={form.handleSubmit(handleFormSubmit)}>
                 <Tabs aria-label="Default tabs" variant="default" ref={tabsRef} onActiveTabChange={(tab) => setActiveTab(tab)}>
                     <Tabs.Item active title="Personal Information" icon={UserPlusIcon} >
-                        <div className="flex flex-col gap-3">
-                            <PersonalInfo form={form} />
-                            <ContactInfo form={form} />
-                            <EmailInfo form={form} />
-                            <PhoneInfo form={form} />
-                            <IDInfo form={form} />
-                            <OccupationInfo form={form} />
-                        </div>
+                        <fieldset disabled={isAdmin}>
+                            <div className="flex flex-col gap-3">
+                                <PersonalInfo form={form} />
+                                <ContactInfo form={form} />
+                                <EmailInfo form={form} />
+                                <PhoneInfo form={form} />
+                                <IDInfo form={form} />
+                                <OccupationInfo form={form} />
+                            </div>
+                        </fieldset>
                     </Tabs.Item>
                     <Tabs.Item title="KYC" icon={CreditCardIcon}>
-                        <div className="flex flex-col gap-3">
-                            <IncomeInfo form={form} />
-                            <AssetInfo form={form} />
-                            <LiabilityInfo form={form} />
-                            <SourceOfWealthInfo form={form} />
-                            <NetWothInfo form={form} />
-                            <ExperienceInfo form={form} />
-                        </div>
+                        <fieldset disabled={isAdmin}>
+                            <div className="flex flex-col gap-3">
+                                <IncomeInfo form={form} />
+                                <AssetInfo form={form} />
+                                <LiabilityInfo form={form} />
+                                <SourceOfWealthInfo form={form} />
+                                <NetWothInfo form={form} />
+                                <ExperienceInfo form={form} />
+                            </div>
+                        </fieldset>
                     </Tabs.Item>
                 </Tabs>
-                <button type="submit" className="button w-fit" disabled={isSubmitting}>{isSubmitting ? "Submiting" : "Submit"}</button>
+                <button type="submit" className="button w-fit" disabled={isSubmitting || isAdmin}>{isSubmitting ? "Submiting" : "Submit"}</button>
             </form>
         </div>
     )
